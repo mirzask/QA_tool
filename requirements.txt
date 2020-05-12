@@ -1,0 +1,9 @@
+pandas
+nibabel
+numpy
+scikit-image
+matplotlib
+SimpleITK
+nibabel
+h5py
+pydicom

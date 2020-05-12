@@ -3,6 +3,14 @@ This repository includes the QA processing for medical image sessions. And there
 
 Please contact Riqiang (riqiang.gao@vanderbilt.edu) if you have any issues or suggestions. 
 
+## 0. Install package dependencies
+
+Use the following command to install the necessary dependencies, e.g. pydicom, scikit-image, etc.
+
+```
+pip install -r requirements.txt
+```
+
 ## 1. Steps for QA
 
 Before the QA processing, assume you already downloaded the DICOM session from XNAT or other resources. For XNAT downloading, please visit https://xnat.vanderbilt.edu/index.php/Download_data_from_XNAT to learn how to use the command line. 
@@ -15,16 +23,19 @@ Before the QA processing, assume you already downloaded the DICOM session from X
 
 **Step 4** Use the dcm2niix tool to convert DICOMs to NIFTI by:
 
-
-> dcm2niix -m n -z y -o *output_folder* *DICOM_folder*
+```
+dcm2niix -m n -z y -o *output_folder* *DICOM_folder*
+```
 
 if set the -m as n doesn't work, set the -m as y. However, here should be *very careful* to check if generated NIFTI is what you want. 
 
 **Step 5**: use the slicedir tool to visualize a batch of NIFTI files to double check, or use MIPAV to check one by one (time consuming). 
 
-> slicesdir *NIFTI1_path* *NIFTI2_path* …… *NIFTIn_path*
+```
+slicesdir *NIFTI1_path* *NIFTI2_path* …… *NIFTIn_path*
+```
 
-You can find the binary slicesdir at /usr/share/fsl/5.0/bin/slicesdir. 
+You can find the binary slicesdir at `/usr/share/fsl/5.0/bin/slicesdir`. 
 
 **FYI**: 
 
@@ -44,7 +55,4 @@ You can find the binary slicesdir at /usr/share/fsl/5.0/bin/slicesdir.
 
 3. Some sessions from XNAT would have more that one folder that contains DICOM files. What we need is if only there is one folder that contains "legal" DICOM files. 
 
-   **My suggestion** is pick the folder with largest number of DICOMs to process in the first round, and keep the record of the session if it has multiple DICOM folders or not. If yes, manually check other folders if the first round didn't pass the QA. Please see  the function  *QA_tool/dcm_fold*  for example.   
-
-    
-
+   **My suggestion** is pick the folder with largest number of DICOMs to process in the first round, and keep the record of the session if it has multiple DICOM folders or not. If yes, manually check other folders if the first round didn't pass the QA. Please see  the function  *QA_tool/dcm_fold*  for example.
