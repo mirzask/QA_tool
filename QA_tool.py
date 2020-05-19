@@ -119,7 +119,8 @@ def check_affine_fold(
 
 
 def sliceDis_fold(fold_root, save_csv_path):
-    subj_list = os.listdir(fold_root)
+    #subj_list = os.listdir(fold_root) # this would throw error if other files, e.g. csv were in the root directory
+    subj_list = [d for d in os.listdir(fold_root) if os.path.isdir(os.path.join(fold_root, d))]
     sess, single_folder, diff = [], [], []
     for i in range(0, len(subj_list)):
         # if i > 3: break
@@ -145,7 +146,8 @@ def sliceDis_fold(fold_root, save_csv_path):
             # break
             # os.rename(sess_path + '/' + instance_list[max_index], sess_path + '/new_max')
             try:
-                same = dcm_slicedistance(sess_path + "/new_max/DICOM")
+                #same = dcm_slicedistance(sess_path + "/new_max/DICOM") # the DICOM files are under `new_max` and not `new_max/DICOM`
+                same = dcm_slicedistance(sess_path + "/new_max/")
                 diff.append(same)
             except:
                 try:
@@ -163,7 +165,7 @@ def sliceDis_fold(fold_root, save_csv_path):
 
 
 def instanceN_fold(fold_root, save_csv_path):  # instanceN_fold
-    subj_list = os.listdir(fold_root)
+    subj_list = [d for d in os.listdir(fold_root) if os.path.isdir(os.path.join(fold_root, d))]
     sess, single_folder, instanceN, dicomN, diff = [], [], [], [], []
     for i in range(0, len(subj_list)):
         # if i > 30: break

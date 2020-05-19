@@ -80,3 +80,20 @@ p = Path("path/to/dcm_root")
 instanceN_fold(fold_root=os.fspath(p), save_csv_path=os.fspath(p / "instance_num_check.csv"))
 ```
 
+# Filter sessions with few slices but that pass instance number check
+
+```python
+filter_few_slices(csv_path = os.fspath(p / 'instance_num_check.csv'))
+```
+
+# Check slice distance on a batch of sessions and Generate QA Report
+
+```python
+sliceDis_fold(fold_root=os.fspath(p), save_csv_path=os.fspath(p / 'slice_dist_check.csv'))
+```
+
+# Convert a batch of sessions from DICOM to NifTI
+
+```python
+dcm2nii_project()
+```
