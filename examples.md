@@ -1,5 +1,7 @@
 # Image File Structure
 
+Example DICOM image obtained from [DICOM library](dicomlibrary.com).
+
 ```
 . (root)
 ├── 123456789 (subject_ID)
